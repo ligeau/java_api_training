@@ -14,7 +14,7 @@ public class Launcher {
         try {
             int port = Integer.parseInt(args[0]);
             System.out.println("try lunch server " + port);
-            var serv  =  new MyServeur();
+            var serv  =  new MyServeur(port);
             serv.staringServeur(port);
 
         } catch (Exception e)

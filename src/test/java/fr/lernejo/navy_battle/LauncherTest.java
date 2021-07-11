@@ -13,7 +13,7 @@ public class LauncherTest {
 
     @Test
     public  void startServeur() throws IOException, InterruptedException {
-        var s = new MyServeur();
+        var s = new MyServeur(6666);
         var c = s.staringServeur(6666);
         var client = HttpClient.newHttpClient();
         var r = HttpRequest.newBuilder()
@@ -27,7 +27,7 @@ public class LauncherTest {
     }
     @Test
     public  void ServerPost() throws IOException, InterruptedException {
-        var s = new MyServeur();
+        var s = new MyServeur(6666);
         var c = s.staringServeur(6666);
         var client = HttpClient.newHttpClient();
         var r = HttpRequest.newBuilder()
