@@ -15,26 +15,23 @@ import java.util.concurrent.Executors;
 
 public class Launcher {
     public static void main(String[] args) {
+        main2(args);
+    }
+    public static HttpServer main2(String [] args)
+    {
+        MyServeur serv  =  null;
+        HttpServer i = null;
         try {
             int port = Integer.parseInt(args[0]);
             System.out.println("try lunch server " + port);
-            MyServeur serv  =  null;
             if (args.length == 1)
                 serv = new MyServeur(port);
-            else {
-                serv = new MyServeur(port,args[1]);
-            }
-            serv.staringServeur(port);
-            if (args.length != 1)
-            {
-                sendPostRequest(args[1], serv);
-            }
+            else { serv = new MyServeur(port,args[1]); }
+            i = serv.staringServeur(port);
+            if (args.length != 1) { sendPostRequest(args[1], serv); }
+        } catch (Exception e) { System.out.println("something goes wrong"); }
+        return i;
 
-
-        } catch (Exception e)
-        {
-            System.out.println("something goes wrong");
-        }
     }
     public static void sendPostRequest(String adversaryUrl, MyServeur serv ) throws IOException, InterruptedException {
         java.net.http.HttpClient client = HttpClient.newHttpClient();
