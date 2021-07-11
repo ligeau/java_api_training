@@ -25,5 +25,17 @@ public class LauncherTest {
         Assertions.assertEquals(myResponce.body(), "OK");
         c.stop(0);
     }
+    @Test
+    public  void ServerPost() throws IOException, InterruptedException {
+        var s = new MyServeur();
+        var c = s.staringServeur(6666);
+        var client = HttpClient.newHttpClient();
+        var r = HttpRequest.newBuilder()
+            .uri(URI.create("http://localhost:6666/api/game/start"))
+            .GET()
+            .build();
+        var myResponce = client.send(r, HttpResponse.BodyHandlers.ofString());
+        c.stop(0);
+    }
 
 }

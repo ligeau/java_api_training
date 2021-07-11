@@ -19,13 +19,21 @@ public class ParsingJson implements HttpHandler {
         try {
             value.set(mapper.readValue(exchange.getResponseBody().toString(), Message.class));
         } catch (JsonProcessingException e) {
-            final String answer = "Bad Reques";
-            exchange.sendResponseHeaders(400,answer.length());
-            try (OutputStream R = exchange.getResponseBody()) { R.write(answer.getBytes()); }
+            senderr(exchange);
+            return;
+        }
+        if (!exchange.getRequestMethod().equals("POST") || value.get().id == null ||  value.get().message == null || value.get().url == null) {
+            senderr(exchange);
+            return;
         }
         final String answer = "Accepted";
         exchange.sendResponseHeaders(202,answer.length());
         try (OutputStream R = exchange.getResponseBody()) {
-            R.write(answer.getBytes()); }
+            R.write(answer.getBytes()); } }
+
+    private void senderr(HttpExchange exchange) throws IOException {
+        final String answer = "Bad Request";
+        exchange.sendResponseHeaders(400,answer.length());
+        try (OutputStream R = exchange.getResponseBody()) { R.write(answer.getBytes()); }
     }
 }
