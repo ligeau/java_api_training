@@ -11,15 +11,15 @@ import java.util.concurrent.Executors;
 
 public class MyServeur {
 
-    public static void staringServeur(int p) {
-        try {
+
+    public static HttpServer staringServeur(int p) throws IOException {
+
             HttpServer s = HttpServer.create(new InetSocketAddress(p), 0);
             s.setExecutor(Executors.newSingleThreadExecutor());
             s.createContext("/ping", new PingHandler());
             s.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            return s;
+
     }
 
 }
