@@ -17,6 +17,7 @@ public class MyServeur {
             HttpServer s = HttpServer.create(new InetSocketAddress(p), 0);
             s.setExecutor(Executors.newSingleThreadExecutor());
             s.createContext("/ping", new PingHandler());
+            s.createContext("/api/game/start", new ParsingJson());
             s.start();
             return s;
 

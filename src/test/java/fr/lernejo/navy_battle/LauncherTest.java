@@ -24,6 +24,6 @@ public class LauncherTest {
         Assertions.assertEquals(myResponce.statusCode(), 200);
         Assertions.assertEquals(myResponce.body(), "OK");
         c.stop(0);
-
     }
+
 }
