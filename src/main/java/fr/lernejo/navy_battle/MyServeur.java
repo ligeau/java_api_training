@@ -17,15 +17,21 @@ import java.util.concurrent.Executors;
 public class MyServeur {
     final  String id;
     final  String url;
-    final static Option<Message> value = new Option<Message>();
+    final  Option<Message> value = new Option<Message>();
+    final  String yaurl;
 
     public MyServeur(int p) {
         this.id = java.util.UUID.randomUUID().toString();
         this.url = "localhost:" + p;
+        this.yaurl = null;
+    }
+    public MyServeur(int p, String str) {
+        this.id = java.util.UUID.randomUUID().toString();
+        this.url = "localhost:" + p;
+        this.yaurl = str;
     }
 
     public HttpServer staringServeur(int p) throws IOException {
-
             HttpServer s = HttpServer.create(new InetSocketAddress(p), 0);
             s.setExecutor(Executors.newSingleThreadExecutor());
             s.createContext("/ping", new PingHandler());
