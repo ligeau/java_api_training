@@ -7,6 +7,7 @@ import com.sun.net.httpserver.HttpHandler;
 
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 
 public class ParsingJson implements HttpHandler {
@@ -17,7 +18,7 @@ public class ParsingJson implements HttpHandler {
     public  void handle(HttpExchange exchange) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            value.set(mapper.readValue(exchange.getResponseBody().toString(), Message.class));
+            value.set(mapper.readValue(new InputStreamReader( exchange.getRequestBody()), Message.class));
         } catch (JsonProcessingException e) {
             senderr(exchange);
             return;
